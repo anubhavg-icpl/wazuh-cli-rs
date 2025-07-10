@@ -47,6 +47,8 @@ tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
 rustls = "0.23"
 rustls-webpki = "0.102"
 jsonwebtoken = "9.2"
+serde_urlencoded = "0.7.1"
+toml = "0.9.1"
 
 [dev-dependencies]
 tokio-test = "0.4"
