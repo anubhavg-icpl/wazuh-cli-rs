@@ -1,14 +1,13 @@
 use anyhow::{anyhow, Context, Result};
 use base64::{engine::general_purpose::STANDARD as BASE64, Engine};
-use chrono::{Duration, Utc};
-use jsonwebtoken::{DecodingKey, TokenData, Validation};
+use chrono::Duration;
+use jsonwebtoken::DecodingKey;
 use reqwest::{Client, ClientBuilder, Response, StatusCode};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use serde_json::json;
 use std::sync::Arc;
 use std::time::Duration as StdDuration;
 use tokio::sync::RwLock;
-use tracing::{debug, error, info, warn};
+use tracing::{debug, info, warn};
 
 use crate::config::Config;
 use crate::error::WazuhError;
@@ -28,11 +27,11 @@ struct LoginRequest {
 
 #[derive(Debug, Deserialize)]
 struct LoginResponse {
-    data: TokenData,
+    data: WazuhTokenData,
 }
 
 #[derive(Debug, Deserialize)]
-struct TokenData {
+struct WazuhTokenData {
     token: String,
 }
 
@@ -194,10 +193,10 @@ impl WazuhClient {
             .request(method.clone(), &url)
             .header("Authorization", format!("Bearer {}", token));
 
-        if let Some(body) = body {
+        if let Some(ref body) = body {
             request = request
                 .header("Content-Type", "application/json")
-                .json(&body);
+                .json(body);
         }
 
         drop(config); // Release read lock
@@ -221,10 +220,10 @@ impl WazuhClient {
                 .request(method.clone(), &url)
                 .header("Authorization", format!("Bearer {}", token));
 
-            if let Some(body) = body {
+            if let Some(ref body) = body {
                 request = request
                     .header("Content-Type", "application/json")
-                    .json(&body);
+                    .json(body);
             }
 
             drop(config);
