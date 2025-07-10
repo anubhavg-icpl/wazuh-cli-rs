@@ -1,0 +1,65 @@
+[package]
+name = "wazuh-cli-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["Security Engineer <security@example.com>"]
+description = "Modern Rust CLI for Wazuh SIEM management"
+license = "GPL-2.0"
+repository = "https://github.com/your-org/wazuh-cli-rs"
+readme = "README.md"
+keywords = ["wazuh", "siem", "security", "cli", "management"]
+categories = ["command-line-utilities", "authentication"]
+
+[dependencies]
+# CLI framework and argument parsing
+clap = { version = "4.5", features = ["derive", "color", "suggestions", "env"] }
+
+# Async runtime and HTTP client
+tokio = { version = "1.35", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+
+# JSON serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Terminal UI and formatting
+colored = "2.1"
+comfy-table = "7.1"
+indicatif = "0.17"
+dialoguer = "0.11"
+console = "0.15"
+
+# Configuration and utilities
+config = { version = "0.14", features = ["toml"] }
+dirs = "5.0"
+chrono = { version = "0.4", features = ["serde"] }
+base64 = "0.22"
+
+# Logging and tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+# Security
+rustls = "0.23"
+rustls-webpki = "0.102"
+jsonwebtoken = "9.2"
+
+[dev-dependencies]
+tokio-test = "0.4"
+wiremock = "0.6"
+pretty_assertions = "1.4"
+
+[[bin]]
+name = "wazuh-cli"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
