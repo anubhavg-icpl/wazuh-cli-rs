@@ -1,7 +1,5 @@
 use anyhow::{anyhow, Context, Result};
 use base64::{engine::general_purpose::STANDARD as BASE64, Engine};
-use chrono::Duration;
-use jsonwebtoken::DecodingKey;
 use reqwest::{Client, ClientBuilder, Response, StatusCode};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use std::sync::Arc;
@@ -86,7 +84,7 @@ impl WazuhClient {
 
     /// Authenticate with the Wazuh API
     pub async fn authenticate(&self) -> Result<()> {
-        let mut config = self.config.write().await;
+        let config = self.config.write().await;
         
         // Check if we already have a valid token
         if let Some(token) = &config.auth.token {
@@ -144,11 +142,16 @@ impl WazuhClient {
     }
 
     /// Check if a token is still valid
-    async fn is_token_valid(&self, _token: &str) -> Result<bool> {
-        // In a real implementation, you would decode the JWT and check expiration
-        // For now, we'll do a simple test request
+    async fn is_token_valid(&self, token: &str) -> Result<bool> {
+        // Make a direct request without going through the request method to avoid recursion
         let test_url = format!("{}/security/user/authenticate/run_as", self.base_url);
-        let response = self.get(&test_url).await?;
+        
+        let response = self.client
+            .get(&test_url)
+            .header("Authorization", format!("Bearer {}", token))
+            .send()
+            .await?;
+            
         Ok(response.status() != StatusCode::UNAUTHORIZED)
     }
 
