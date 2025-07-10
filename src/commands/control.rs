@@ -1,17 +1,17 @@
-use anyhow::{Context, Result};
+use anyhow::Result;
 use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::RwLock;
-use tracing::{debug, info};
+use tracing::info;
 
 use crate::{
     cli::{ControlAction, ControlCommand},
     client::WazuhClient,
     config::Config,
-    models::{ApiResponse, ManagerInfo, Service},
-    output::{print_json, print_services_table, print_success, print_info},
+    models::{ApiResponse, Service},
+    output::{print_json, print_services_table, print_success},
 };
 
 pub async fn handle_control_command(
@@ -120,7 +120,7 @@ async fn start_service(
     pb.enable_steady_tick(Duration::from_millis(120));
 
     let url = if service.is_some() && service.as_ref().unwrap() != "all" {
-        format!("/manager/restart?service={}", service.unwrap())
+        format!("/manager/restart?service={}", service.as_ref().unwrap())
     } else {
         "/manager/restart".to_string()
     };
@@ -145,9 +145,9 @@ async fn start_service(
 }
 
 async fn stop_service(
-    client: &WazuhClient,
+    _client: &WazuhClient,
     service: Option<String>,
-    json_output: bool,
+    _json_output: bool,
 ) -> Result<()> {
     if service.is_none() || service.as_ref().unwrap() == "all" {
         eprintln!(
@@ -157,7 +157,7 @@ async fn stop_service(
         return Ok(());
     }
 
-    let service_name = service.unwrap();
+    let _service_name = service.unwrap();
     
     // Note: Wazuh API doesn't have a direct stop endpoint for individual services
     // This is a limitation of the current API

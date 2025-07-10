@@ -1,4 +1,3 @@
-use anyhow::Result;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// Get current timestamp in seconds since UNIX epoch

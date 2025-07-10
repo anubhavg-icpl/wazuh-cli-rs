@@ -61,7 +61,7 @@ fn show_config(config: &Config, json_output: bool) -> Result<()> {
     Ok(())
 }
 
-fn set_config_value(config: &Config, key: &str, value: &str) -> Result<()> {
+fn set_config_value(_config: &Config, key: &str, value: &str) -> Result<()> {
     print_info(&format!("Setting {} = {}", key, value));
     
     // In a real implementation, this would modify the config and save it

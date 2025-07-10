@@ -1,12 +1,12 @@
 use anyhow::Result;
 use colored::Colorize;
-use dialoguer::{theme::ColorfulTheme, Input, Select};
+use dialoguer::Input;
 use std::io::{self, Write};
 
 use crate::config::Config;
 use crate::output::print_info;
 
-pub async fn start_interactive_mode(config: &Config) -> Result<()> {
+pub async fn start_interactive_mode(_config: &Config) -> Result<()> {
     println!("{}", "Wazuh CLI - Interactive Mode".bold().blue());
     println!("Type 'help' for commands, 'exit' to quit\n");
 

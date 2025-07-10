@@ -1,4 +1,4 @@
-use anyhow::{Context, Result};
+use anyhow::Result;
 use colored::Colorize;
 use dialoguer::Confirm;
 use indicatif::{ProgressBar, ProgressStyle};
@@ -11,7 +11,7 @@ use crate::{
     cli::{AgentAction, AgentCommand},
     client::WazuhClient,
     config::Config,
-    models::{AddAgentRequest, Agent, AgentListResponse, AgentParams, ApiResponse},
+    models::{AddAgentRequest, AgentListResponse, AgentParams, ApiResponse},
     output::{print_agents_table, print_json, print_single_agent},
 };
 
