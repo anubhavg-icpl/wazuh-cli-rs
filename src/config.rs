@@ -230,15 +230,6 @@ impl Config {
         self.auth.token = Some(token);
     }
 
-    /// Clear authentication token
-    pub fn clear_token(&mut self) {
-        self.auth.token = None;
-    }
-
-    /// Check if authenticated
-    pub fn is_authenticated(&self) -> bool {
-        self.auth.token.is_some()
-    }
 }
 
 #[cfg(test)]

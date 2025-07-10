@@ -17,11 +17,6 @@ pub struct WazuhClient {
     base_url: String,
 }
 
-#[derive(Debug, Serialize)]
-struct LoginRequest {
-    username: String,
-    password: String,
-}
 
 #[derive(Debug, Deserialize)]
 struct LoginResponse {

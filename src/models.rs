@@ -224,12 +224,6 @@ pub struct AddAgentRequest {
     pub force: Option<bool>,
 }
 
-/// Response from adding a new agent
-#[derive(Debug, Deserialize)]
-pub struct AddAgentResponse {
-    pub id: String,
-    pub key: String,
-}
 
 #[cfg(test)]
 mod tests {

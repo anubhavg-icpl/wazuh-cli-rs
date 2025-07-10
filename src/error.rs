@@ -5,11 +5,6 @@ pub enum WazuhError {
     #[error("API error ({code}): {message}")]
     ApiError { code: i32, message: String },
 
-    #[error("Authentication failed: {0}")]
-    AuthenticationError(String),
-
-    #[error("Configuration error: {0}")]
-    ConfigError(String),
 
     #[error("Network error: {0}")]
     NetworkError(String),
@@ -17,8 +12,6 @@ pub enum WazuhError {
     #[error("Serialization error: {0}")]
     SerializationError(String),
 
-    #[error("Invalid input: {0}")]
-    InvalidInput(String),
 
     #[error("Resource not found: {0}")]
     NotFound(String),
@@ -61,5 +54,3 @@ impl From<std::io::Error> for WazuhError {
     }
 }
 
-/// Result type alias for Wazuh operations
-pub type WazuhResult<T> = Result<T, WazuhError>;

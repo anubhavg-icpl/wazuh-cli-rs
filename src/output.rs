@@ -190,15 +190,6 @@ pub fn print_success(message: &str) {
     println!("{} {}", "✓".green().bold(), message);
 }
 
-/// Print an error message
-pub fn print_error(message: &str) {
-    eprintln!("{} {}", "✗".red().bold(), message);
-}
-
-/// Print a warning message
-pub fn print_warning(message: &str) {
-    println!("{} {}", "⚠".yellow().bold(), message);
-}
 
 /// Print an info message
 pub fn print_info(message: &str) {
