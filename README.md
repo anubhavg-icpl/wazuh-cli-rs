@@ -20,7 +20,7 @@ A modern, fast, and user-friendly command-line interface for managing Wazuh SIEM
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/wazuh-cli-rs.git
+git clone https://github.com/anubhavg-icpl/wazuh-cli-rs.git
 cd wazuh-cli-rs
 
 # Build and install
@@ -30,7 +30,7 @@ cargo install --path .
 
 ### Pre-built Binaries
 
-Download the latest release for your platform from the [releases page](https://github.com/your-org/wazuh-cli-rs/releases).
+Download the latest release for your platform from the [releases page](https://github.com/anubhavg-icpl/wazuh-cli-rs/releases).
 
 ## Configuration
 
@@ -243,5 +243,5 @@ For security concerns, please email security@example.com instead of using the is
 ## Support
 
 - Documentation: [https://docs.example.com/wazuh-cli](https://docs.example.com/wazuh-cli)
-- Issues: [GitHub Issues](https://github.com/your-org/wazuh-cli-rs/issues)
-- Discussions: [GitHub Discussions](https://github.com/your-org/wazuh-cli-rs/discussions)
+- Issues: [GitHub Issues](https://github.com/anubhavg-icpl/wazuh-cli-rs/issues)
+- Discussions: [GitHub Discussions](https://github.com/anubhavg-icpl/wazuh-cli-rs/discussions)
